@@ -109,4 +109,4 @@ student_id_to_query = 3
 medals_info = db_manager.fetch_medals_by_student(student_id_to_query)
 if medals_info is not None:
     print(medals_info)
-# ajghkjhasgkhjasg
+# ajghkjhasgkhja
