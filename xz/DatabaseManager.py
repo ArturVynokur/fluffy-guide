@@ -170,4 +170,3 @@ class DatabaseManager:
                 for medal_type, subject_names in data['medals']:
                     if subject_names is not None:
                         print(f"{len(subject_names.split(','))} {medal_type} ({subject_names})")
-print("xz")
