@@ -7,3 +7,4 @@ class Subject:
         query = "INSERT INTO subjects (subject_name) VALUES (%s)"
         values = (self.subject_name,)
         db_manager.execute_query(query, values)
+

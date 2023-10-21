@@ -2,66 +2,67 @@
   "students": [
     {
       "student_id": 1,
-      "student_name": "Иванов Иван",
+      "student_name": "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ",
       "grades": [
         {
           "subject_id": "1",
-          "subject": "Математика",
+          "subject": "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
           "grade": 95
         },
         {
           "subject_id": "2",
-          "subject": "Физика",
+          "subject": "пїЅпїЅпїЅпїЅпїЅпїЅ",
           "grade": 85
         },
         {
           "subject_id": "3",
-          "subject": "Литература",
+          "subject": "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
           "grade": 90
         }
       ]
     },
     {
       "student_id": 2,
-      "student_name": "Петров Петр",
+      "student_name": "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ",
       "grades": [
         {
           "subject_id": "1",
-          "subject": "Математика",
+          "subject": "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
           "grade": 88
         },
         {
           "subject_id": "2",
-          "subject": "Физика",
+          "subject": "пїЅпїЅпїЅпїЅпїЅпїЅ",
           "grade": 92
         },
         {
           "subject_id": "3",
-          "subject": "Литература",
+          "subject": "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
           "grade": 78
         }
       ]
     },
     {
       "student_id": 3,
-      "student_name": "Мария Иванова",
+      "student_name": "пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
       "grades": [
         {
           "subject_id": "1",
-          "subject": "Математика",
+          "subject": "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
           "grade": 75
         },
         {
           "subject_id": "2",
-          "subject": "Физика",
+          "subject": "пїЅпїЅпїЅпїЅпїЅпїЅ",
           "grade": 89
         },
         {
           "subject_id": "3",
-          "subject": "Литература",
+          "subject": "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
           "grade": 94
         }
       ]
     }
   ]
 }
+
