@@ -1,8 +1,9 @@
 import mysql.connector
 
-
 class DatabaseManager:
     def __init__(self, host, user, password, database):
+        # Конструктор класса DatabaseManager инициализирует объект DatabaseManager
+        # и устанавливает соединение с базой данных MySQL, используя переданные параметры.
         self.conn = mysql.connector.connect(
             host=host,
             user=user,
@@ -12,6 +13,9 @@ class DatabaseManager:
         self.cursor = self.conn.cursor()
 
     def execute_query(self, query, values=None):
+        # Метод execute_query выполняет SQL-запрос к базе данных.
+        # Если переданы значения (values), то они подставляются в запрос,
+        # иначе выполняется запрос без значений.
         if values:
             self.cursor.execute(query, values)
         else:
@@ -19,6 +23,9 @@ class DatabaseManager:
         self.conn.commit()
 
     def fetch_query(self, query, values=None):
+        # Метод fetch_query выполняет SQL-запрос и возвращает результат в виде списка кортежей.
+        # Если переданы значения (values), то они подставляются в запрос,
+        # иначе выполняется запрос без значений.
         if values:
             self.cursor.execute(query, values)
         else:
@@ -26,9 +33,13 @@ class DatabaseManager:
         return self.cursor.fetchall()
 
     def close(self):
+        # Метод close закрывает соединение с базой данных.
         self.conn.close()
 
     def fetch_student_by_id(self, student_id):
+        # Метод fetch_student_by_id выполняет запрос к базе данных,
+        # чтобы получить информацию о студенте по его идентификатору.
+        # Результат запроса возвращается в виде словаря с информацией о студенте.
         query = """
         SELECT students.student_id, students.student_name, grades.grade, subjects.subject_name
         FROM students
@@ -55,6 +66,9 @@ class DatabaseManager:
         return student_info
 
     def fetch_excellent_students(self, threshold):
+        # Метод fetch_excellent_students выполняет запрос к базе данных,
+        # чтобы получить информацию о студентах с отличными оценками.
+        # Результат запроса возвращается в виде списка словарей.
         query = """
             SELECT students.student_id, students.student_name, grades.grade, subjects.subject_name
             FROM students
@@ -84,6 +98,9 @@ class DatabaseManager:
         return excellent_students
 
     def fetch_student_with_highest_grades(self):
+        # Метод fetch_student_with_highest_grades выполняет запрос к базе данных,
+        # чтобы получить информацию о студенте с наивысшими оценками.
+        # Результат запроса возвращается в виде списка словарей.
         query = """
               SELECT students.student_id, students.student_name, subjects.subject_name,
               MAX(grades.grade) as highest_grade
@@ -111,6 +128,9 @@ class DatabaseManager:
         return students_with_highest_grades
 
     def fetch_the_stupidest_student(self):
+        # Метод fetch_the_stupidest_student выполняет запрос к базе данных,
+        # чтобы получить информацию о самом неуспешном студенте (с самой низкой оценкой).
+        # Результат запроса возвращается в виде списка словарей.
         query = """
             SELECT students.student_id, students.student_name, subjects.subject_name,
             MIN(grades.grade) as lowest_grade
@@ -139,34 +159,36 @@ class DatabaseManager:
         return the_stupidest_student
 
     def fetch_medals_by_student(self, student_id):
-        if not None:
-            query = """
-            SELECT students.student_id, students.student_name, medals.medal_type, 
-            GROUP_CONCAT(subjects.subject_name) AS subject_names
-            FROM students 
-            LEFT JOIN medals ON students.student_id = medals.student_id
-            LEFT JOIN subjects ON medals.subject_id = subjects.subject_id
-            WHERE medals.student_id = %s
-            GROUP BY medals.student_id, medals.medal_type
-            """
-            value = (student_id,)
-            self.cursor.execute(query, value)
-            result = self.cursor.fetchall()
+        # Метод fetch_medals_by_student выполняет запрос к базе данных,
+        # чтобы получить информацию о медалях, полученных студентом.
+        # Результат запроса возвращается в виде информации о медалях студента.
+        query = """
+        SELECT students.student_id, students.student_name, medals.medal_type, 
+        GROUP_CONCAT(subjects.subject_name) AS subject_names
+        FROM students 
+        LEFT JOIN medals ON students.student_id = medals.student_id
+        LEFT JOIN subjects ON medals.subject_id = subjects.subject_id
+        WHERE medals.student_id = %s
+        GROUP BY medals.student_id, medals.medal_type
+        """
+        value = (student_id,)
+        self.cursor.execute(query, value)
+        result = self.cursor.fetchall()
 
-            student_data = {}
+        student_data = {}
 
-            for row in result:
-                if row is not None:
-                    student_id, student_name, medal_type, subject_name = row
-                    if student_id not in student_data:
-                        student_data[student_id] = {
-                            'name': student_name,
-                            'medals': []
-                        }
-                    student_data[student_id]['medals'].append((medal_type, subject_name))
+        for row in result:
+            if row is not None:
+                student_id, student_name, medal_type, subject_name = row
+                if student_id not in student_data:
+                    student_data[student_id] = {
+                        'name': student_name,
+                        'medals': []
+                    }
+                student_data[student_id]['medals'].append((medal_type, subject_name))
 
-            for student_id, data in student_data.items():
-                print(f"Имя {data['name']}")
-                for medal_type, subject_names in data['medals']:
-                    if subject_names is not None:
-                        print(f"{len(subject_names.split(','))} {medal_type} ({subject_names})")
+        for student_id, data in student_data.items():
+            print(f"Имя {data['name']}")
+            for medal_type, subject_names in data['medals']:
+                if subject_names is not None:
+                    print(f"{len(subject_names.split(','))} {medal_type} ({subject_names})")
